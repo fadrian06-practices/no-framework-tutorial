@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace NFT;
 
+use FastRoute\Dispatcher;
+use FastRoute\RouteCollector;
 use Http\HttpRequest;
 use Http\HttpResponse;
 use Throwable;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+
+use function FastRoute\simpleDispatcher;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -37,8 +41,32 @@ $request = new class($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER) extends HttpReq
 
 $response = new HttpResponse;
 
-$content = '<h1>Hello World</h1>';
-$response->setContent($content);
+$routeDefinitionCallback = function (RouteCollector $router) {
+  $routes = require __DIR__ . '/routes.php';
+
+  foreach ($routes as $route) {
+    $router->addRoute($route[0], $route[1], $route[2]);
+  }
+};
+
+$dispatcher = simpleDispatcher($routeDefinitionCallback);
+$routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
+
+switch ($routeInfo[0]) {
+  case Dispatcher::NOT_FOUND:
+    $response->setContent('404 - Page not found');
+    $response->setStatusCode(404);
+    break;
+  case Dispatcher::METHOD_NOT_ALLOWED:
+    $response->setContent('405 - Method not allowed');
+    $response->setStatusCode(405);
+    break;
+  case Dispatcher::FOUND:
+    $handler = $routeInfo[1];
+    $vars = $routeInfo[2];
+    call_user_func($handler, $vars);
+    break;
+}
 
 foreach ($response->getHeaders() as $header) {
   header($header, false);
