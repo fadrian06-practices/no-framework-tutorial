@@ -7,7 +7,7 @@ namespace NFT\Controllers;
 use Http\Response;
 use NFT\Page\InvalidPageException;
 use NFT\Page\PageReader;
-use NFT\Template\Renderer;
+use NFT\Template\FrontendRenderer;
 
 final class Page
 {
@@ -17,7 +17,7 @@ final class Page
 
   function __construct(
     Response $response,
-    Renderer $renderer,
+    FrontendRenderer $renderer,
     PageReader $pageReader
   ) {
     $this->response = $response;

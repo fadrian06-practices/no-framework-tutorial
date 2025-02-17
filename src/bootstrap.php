@@ -6,8 +6,6 @@ namespace NFT;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Http\HttpRequest;
-use Http\HttpResponse;
 use Http\Request;
 use Http\Response;
 use Throwable;

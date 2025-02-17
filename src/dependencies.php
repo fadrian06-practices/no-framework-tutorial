@@ -7,10 +7,17 @@ use Http\HttpResponse;
 use Http\Request;
 use Http\Response;
 use NFT\HttpRequestAdapter;
+use NFT\Menu\ArrayMenuReader;
+use NFT\Menu\MenuReader;
 use NFT\Page\FilePageReader;
 use NFT\Page\PageReader;
+use NFT\Template\FrontendRenderer;
+use NFT\Template\FrontendTwigRenderer;
 use NFT\Template\MustacheRenderer;
 use NFT\Template\Renderer;
+use NFT\Template\TwigRenderer;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 $injector = new Injector;
 
@@ -28,15 +35,14 @@ $injector->define(HttpRequestAdapter::class, [
 $injector->alias(Response::class, HttpResponse::class);
 $injector->share(HttpResponse::class);
 
-$injector->alias(Renderer::class, MustacheRenderer::class);
+$injector->alias(Renderer::class, TwigRenderer::class);
 
-$injector->define(Mustache_Engine::class, [
-  ':options' => [
-    'loader' => new Mustache_Loader_FilesystemLoader(dirname(__DIR__) . '/templates', [
-      'extension' => '.html',
-    ]),
-  ],
-]);
+$injector->delegate(Environment::class, static function (): Environment {
+  $loader = new FilesystemLoader(dirname(__DIR__) . '/templates');
+  $twig = new Environment($loader);
+
+  return $twig;
+});
 
 $injector->define(FilePageReader::class, [
   ':pageFolder' => __DIR__ . '/../pages',
@@ -44,5 +50,10 @@ $injector->define(FilePageReader::class, [
 
 $injector->alias(PageReader::class, FilePageReader::class);
 $injector->share(FilePageReader::class);
+
+$injector->alias(FrontendRenderer::class, FrontendTwigRenderer::class);
+
+$injector->alias(MenuReader::class, ArrayMenuReader::class);
+$injector->share(ArrayMenuReader::class);
 
 return $injector;
