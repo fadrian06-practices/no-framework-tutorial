@@ -1,7 +1,34 @@
-{% for item in menuItems %}
-<a href="{{ item['href'] }}">{{ item['text'] }}</a>
-<br />
-{% endfor %}
-<hr />
-{% block content %}
-{% endblock %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>No framework tutorial</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <div class="menu">
+        <div class="pure-menu">
+          <ul class="pure-menu-list">
+            {% for item in menuItems %}
+            <li class="pure-menu-item">
+              <a href="{{ item['href'] }}" class="pure-menu-link">
+                {{ item['text'] }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div id="main">
+        <div class="content">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
