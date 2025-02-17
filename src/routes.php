@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-return [
-  ['GET', '/hello-world', static function (): void {
-    echo 'Hello World';
-  }],
+use NFT\Controllers\Homepage;
 
-  ['GET', '/another-route', static function (): void {
-    echo 'This works too';
-  }],
+return [
+  ['GET', '/', [Homepage::class, 'show']]
 ];
