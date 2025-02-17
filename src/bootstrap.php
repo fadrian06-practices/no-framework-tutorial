@@ -8,6 +8,8 @@ use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Http\HttpRequest;
 use Http\HttpResponse;
+use Http\Request;
+use Http\Response;
 use Throwable;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
@@ -35,13 +37,11 @@ if ($environment !== 'production') {
 
 $whoops->register();
 
-$request = new class($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER) extends HttpRequest {
-  protected $inputStream = '';
-};
+$injector = require __DIR__ . '/dependencies.php';
+$request = $injector->make(Request::class);
+$response = $injector->make(Response::class);
 
-$response = new HttpResponse;
-
-$routeDefinitionCallback = function (RouteCollector $router) {
+$routeDefinitionCallback = static function (RouteCollector $router) {
   $routes = require __DIR__ . '/routes.php';
 
   foreach ($routes as $route) {
@@ -66,7 +66,7 @@ switch ($routeInfo[0]) {
     $method = $routeInfo[1][1];
     $vars = $routeInfo[2];
 
-    $class = new $className($response);
+    $class = $injector->make($className);
     $class->$method($vars);
     break;
 }
