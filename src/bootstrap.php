@@ -18,18 +18,20 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 error_reporting(E_ALL);
 
-$environment = 'development';
+$environment = getenv('ENVIRONMENT') ?: 'dev';
 
 /**
  * Register the error handler
  */
 $whoops = new Run;
 
-if ($environment !== 'production') {
+if ($environment === 'dev') {
   $whoops->pushHandler(new PrettyPageHandler);
 } else {
   $whoops->pushHandler(static function (Throwable $error): void {
-    echo 'Todo: Friendly error page and send an email to the developer';
+    ini_set('error_log', __DIR__ . '/../logs/error.log');
+    error_log("Error: {$error->getMessage()}", $error->getCode());
+    echo 'An Error happened';
   });
 }
 
