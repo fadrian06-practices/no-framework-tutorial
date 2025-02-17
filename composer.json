@@ -1,0 +1,16 @@
+{
+  "require": {
+    "php": ">=7.8"
+  },
+  "scripts": {
+    "pre-install-cmd": [
+      "composer check-platform-reqs"
+    ],
+    "dev": "php -S localhost:8000 -t public"
+  },
+  "autoload": {
+    "psr-4": {
+      "NFT\\": "src"
+    }
+  }
+}
