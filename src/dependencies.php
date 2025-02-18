@@ -13,7 +13,6 @@ use NFT\Page\FilePageReader;
 use NFT\Page\PageReader;
 use NFT\Template\FrontendRenderer;
 use NFT\Template\FrontendTwigRenderer;
-use NFT\Template\MustacheRenderer;
 use NFT\Template\Renderer;
 use NFT\Template\TwigRenderer;
 use Twig\Environment;

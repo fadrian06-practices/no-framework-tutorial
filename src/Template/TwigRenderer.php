@@ -8,11 +8,8 @@ use Twig\Environment;
 
 final class TwigRenderer implements Renderer
 {
-  private $renderer;
-
-  function __construct(Environment $renderer)
+  function __construct(private readonly Environment $renderer)
   {
-    $this->renderer = $renderer;
   }
 
   function render(string $template, array $data = []): string

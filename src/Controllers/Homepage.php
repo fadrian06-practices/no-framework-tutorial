@@ -10,19 +10,11 @@ use NFT\Template\FrontendRenderer;
 
 final class Homepage
 {
-  private $request;
-  private $response;
-  private $renderer;
-
   function __construct(
-    Request $request,
-    Response $response,
-    FrontendRenderer $renderer
-  ) {
-    $this->request = $request;
-    $this->response = $response;
-    $this->renderer = $renderer;
-  }
+    private readonly Request $request,
+    private readonly Response $response,
+    private readonly FrontendRenderer $renderer
+  ) {}
 
   function show(): void
   {

@@ -8,14 +8,10 @@ use NFT\Menu\MenuReader;
 
 final class FrontendTwigRenderer implements FrontendRenderer
 {
-  private $renderer;
-  private $menuReader;
-
-  function __construct(Renderer $renderer, MenuReader $menuReader)
-  {
-    $this->renderer = $renderer;
-    $this->menuReader = $menuReader;
-  }
+  function __construct(
+    private readonly Renderer $renderer,
+    private readonly MenuReader $menuReader
+  ) {}
 
   function render(string $template, array $data = []): string
   {

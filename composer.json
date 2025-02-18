@@ -1,6 +1,6 @@
 {
   "require": {
-    "php": ">=7.8",
+    "php": ">=8.1",
     "filp/whoops": "^2.17",
     "patricklouys/http": "^1.4",
     "nikic/fast-route": "^1.3",

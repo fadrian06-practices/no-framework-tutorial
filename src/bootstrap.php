@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NFT;
 
+use Auryn\InjectorException;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Http\Request;
@@ -30,6 +31,7 @@ if ($environment === 'dev') {
 } else {
   $whoops->pushHandler(static function (Throwable $error): void {
     ini_set('error_log', __DIR__ . '/../logs/error.log');
+    assert(in_array($error->getCode(), [0, 1, 3, 4], true));
     error_log("Error: {$error->getMessage()}", $error->getCode());
     echo 'An Error happened';
   });
@@ -67,7 +69,15 @@ switch ($routeInfo[0]) {
     $vars = $routeInfo[2];
 
     $class = $injector->make($className);
-    $class->$method($vars);
+    $callback = [$class, $method];
+    assert(is_callable($callback));
+
+    try {
+      $injector->execute($callback, $vars);
+    } catch (InjectorException) {
+      call_user_func($callback, $vars);
+    }
+
     break;
 }
 

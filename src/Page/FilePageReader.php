@@ -6,11 +6,8 @@ namespace NFT\Page;
 
 final class FilePageReader implements PageReader
 {
-  private $pageFolder;
-
-  function __construct(string $pageFolder)
+  function __construct(private readonly string $pageFolder)
   {
-    $this->pageFolder = $pageFolder;
   }
 
   function readBySlug(string $slug): string
@@ -21,6 +18,9 @@ final class FilePageReader implements PageReader
       throw new InvalidPageException($slug);
     }
 
-    return file_get_contents($path);
+    $contents = file_get_contents($path);
+    assert($contents);
+
+    return $contents;
   }
 }

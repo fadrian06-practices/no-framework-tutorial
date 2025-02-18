@@ -6,5 +6,6 @@ namespace NFT\Menu;
 
 interface MenuReader
 {
+  /** @return array{href: string, text: string}[] */
   function readMenu(): array;
 }

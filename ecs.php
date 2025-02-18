@@ -20,8 +20,18 @@ use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return static function (ECSConfig $config): void {
   $config->parallel();
-  $config->paths([__DIR__ . '/src', __DIR__ . '/ecs.php', __DIR__ . '/rector.php']);
-  $config->skip([BlankLineAfterOpeningTagFixer::class, OrderedImportsFixer::class, NewWithBracesFixer::class]);
+
+  $config->paths([
+    __DIR__ . '/src',
+    __DIR__ . '/ecs.php',
+    __DIR__ . '/rector.php'
+  ]);
+
+  $config->skip([
+    BlankLineAfterOpeningTagFixer::class,
+    OrderedImportsFixer::class,
+    NewWithBracesFixer::class
+  ]);
 
   $config->sets([
     SetList::PSR_12,
@@ -51,20 +61,17 @@ return static function (ECSConfig $config): void {
   ]);
 
   // import all namespaces, and even php core functions and classes
-  $config->ruleWithConfiguration(
-    ReferenceUsedNamesOnlySniff::class,
-    [
-      'allowFallbackGlobalConstants' => false,
-      'allowFallbackGlobalFunctions' => false,
-      'allowFullyQualifiedGlobalClasses' => false,
-      'allowFullyQualifiedGlobalConstants' => false,
-      'allowFullyQualifiedGlobalFunctions' => false,
-      'allowFullyQualifiedNameForCollidingClasses' => true,
-      'allowFullyQualifiedNameForCollidingConstants' => true,
-      'allowFullyQualifiedNameForCollidingFunctions' => true,
-      'searchAnnotations' => true,
-    ]
-  );
+  $config->ruleWithConfiguration(ReferenceUsedNamesOnlySniff::class, [
+    'allowFallbackGlobalConstants' => false,
+    'allowFallbackGlobalFunctions' => false,
+    'allowFullyQualifiedGlobalClasses' => false,
+    'allowFullyQualifiedGlobalConstants' => false,
+    'allowFullyQualifiedGlobalFunctions' => false,
+    'allowFullyQualifiedNameForCollidingClasses' => true,
+    'allowFullyQualifiedNameForCollidingConstants' => true,
+    'allowFullyQualifiedNameForCollidingFunctions' => true,
+    'searchAnnotations' => true,
+  ]);
 
   // define newlines between use statements
   $config->ruleWithConfiguration(UseSpacingSniff::class, [

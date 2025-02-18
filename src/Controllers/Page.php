@@ -11,32 +11,25 @@ use NFT\Template\FrontendRenderer;
 
 final class Page
 {
-  private $response;
-  private $renderer;
-  private $pageReader;
-
   function __construct(
-    Response $response,
-    FrontendRenderer $renderer,
-    PageReader $pageReader
-  ) {
-    $this->response = $response;
-    $this->renderer = $renderer;
-    $this->pageReader = $pageReader;
-  }
+    private readonly Response $response,
+    private readonly FrontendRenderer $renderer,
+    private readonly PageReader $pageReader
+  ) {}
 
-  function show($params)
+  /** @param array{slug: string} $params */
+  function show(array $params): void
   {
     $slug = $params['slug'];
+    $data = [];
 
     try {
       $data['content'] = $this->pageReader->readBySlug($slug);
-    } catch (InvalidPageException $error) {
+      $html = $this->renderer->render('page', $data);
+      $this->response->setContent($html);
+    } catch (InvalidPageException) {
       $this->response->setStatusCode(404);
-      return $this->response->setContent('404 - Page not found');
+      $this->response->setContent('404 - Page not found');
     }
-
-    $html = $this->renderer->render('page', $data);
-    $this->response->setContent($html);
   }
 }
