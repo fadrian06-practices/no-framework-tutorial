@@ -8,5 +8,5 @@ use Http\HttpRequest;
 
 final class HttpRequestAdapter extends HttpRequest
 {
-  protected string $inputStream = '';
+    protected string $inputStream = '';
 }

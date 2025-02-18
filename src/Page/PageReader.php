@@ -6,5 +6,5 @@ namespace NFT\Page;
 
 interface PageReader
 {
-  function readBySlug(string $slug): string;
+    public function readBySlug(string $slug): string;
 }

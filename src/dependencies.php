@@ -18,17 +18,17 @@ use NFT\Template\TwigRenderer;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-$injector = new Injector;
+$injector = new Injector();
 
 $injector->alias(Request::class, HttpRequestAdapter::class);
 $injector->share(HttpRequestAdapter::class);
 
 $injector->define(HttpRequestAdapter::class, [
-  ':get' => $_GET,
-  ':post' => $_POST,
-  ':cookies' => $_COOKIE,
-  ':files' => $_FILES,
-  ':server' => $_SERVER,
+    ':get' => $_GET,
+    ':post' => $_POST,
+    ':cookies' => $_COOKIE,
+    ':files' => $_FILES,
+    ':server' => $_SERVER,
 ]);
 
 $injector->alias(Response::class, HttpResponse::class);
@@ -37,14 +37,14 @@ $injector->share(HttpResponse::class);
 $injector->alias(Renderer::class, TwigRenderer::class);
 
 $injector->delegate(Environment::class, static function (): Environment {
-  $loader = new FilesystemLoader(dirname(__DIR__) . '/templates');
-  $twig = new Environment($loader);
+    $loader = new FilesystemLoader(dirname(__DIR__) . '/templates');
+    $twig = new Environment($loader);
 
-  return $twig;
+    return $twig;
 });
 
 $injector->define(FilePageReader::class, [
-  ':pageFolder' => __DIR__ . '/../pages',
+    ':pageFolder' => __DIR__ . '/../pages',
 ]);
 
 $injector->alias(PageReader::class, FilePageReader::class);

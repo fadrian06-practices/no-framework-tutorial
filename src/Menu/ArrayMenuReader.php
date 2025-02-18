@@ -6,11 +6,17 @@ namespace NFT\Menu;
 
 final class ArrayMenuReader implements MenuReader
 {
-  function readMenu(): array
-  {
-    return [
-      ['href' => '/', 'text' => 'Homepage'],
-      ['href' => '/page-one', 'text' => 'Page One'],
-    ];
-  }
+    public function readMenu(): array
+    {
+        return [
+            [
+                'href' => '/',
+                'text' => 'Homepage',
+            ],
+            [
+                'href' => '/page-one',
+                'text' => 'Page One',
+            ],
+        ];
+    }
 }
