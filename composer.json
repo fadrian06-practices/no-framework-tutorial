@@ -12,11 +12,35 @@
     "pre-install-cmd": [
       "composer check-platform-reqs"
     ],
-    "dev": "php -S localhost:8000 -t public"
+    "serve": [
+      "Composer\\Config::disableProcessTimeout",
+      "php -S 0.0.0.0:1235 -t public"
+    ],
+    "phpstan": "./vendor/bin/phpstan analyze",
+    "baseline": "./vendor/bin/phpstan analyze --generate-baseline",
+    "check": "./vendor/bin/ecs",
+    "fix": "./vendor/bin/ecs --fix",
+    "rector": "./vendor/bin/rector process"
   },
   "autoload": {
     "psr-4": {
       "NFT\\": "src"
+    }
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^7.2",
+    "slevomat/coding-standard": "^8.15",
+    "phpstan/phpstan-strict-rules": "^1.6",
+    "thecodingmachine/phpstan-strict-rules": "^1.0",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan": "^1.12",
+    "rector/rector": "^1.2",
+    "symplify/easy-coding-standard": "^12.5"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
     }
   }
 }

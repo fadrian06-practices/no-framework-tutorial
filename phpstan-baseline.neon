@@ -1,0 +1,121 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Property NFT\\\\Controllers\\\\Homepage\\:\\:\\$renderer has no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Homepage.php
+
+		-
+			message: "#^Property NFT\\\\Controllers\\\\Homepage\\:\\:\\$request has no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Homepage.php
+
+		-
+			message: "#^Property NFT\\\\Controllers\\\\Homepage\\:\\:\\$response has no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Homepage.php
+
+		-
+			message: "#^Implicit array creation is not allowed \\- variable \\$data does not exist\\.$#"
+			count: 1
+			path: src/Controllers/Page.php
+
+		-
+			message: "#^Method NFT\\\\Controllers\\\\Page\\:\\:show\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controllers/Page.php
+
+		-
+			message: "#^Method NFT\\\\Controllers\\\\Page\\:\\:show\\(\\) has parameter \\$params with no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Page.php
+
+		-
+			message: "#^Property NFT\\\\Controllers\\\\Page\\:\\:\\$pageReader has no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Page.php
+
+		-
+			message: "#^Property NFT\\\\Controllers\\\\Page\\:\\:\\$renderer has no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Page.php
+
+		-
+			message: "#^Property NFT\\\\Controllers\\\\Page\\:\\:\\$response has no type specified\\.$#"
+			count: 1
+			path: src/Controllers/Page.php
+
+		-
+			message: "#^Property NFT\\\\HttpRequestAdapter\\:\\:\\$inputStream has no type specified\\.$#"
+			count: 1
+			path: src/HttpRequestAdapter.php
+
+		-
+			message: "#^Method NFT\\\\Menu\\\\ArrayMenuReader\\:\\:readMenu\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Menu/ArrayMenuReader.php
+
+		-
+			message: "#^Method NFT\\\\Menu\\\\MenuReader\\:\\:readMenu\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Menu/MenuReader.php
+
+		-
+			message: "#^Method NFT\\\\Page\\\\FilePageReader\\:\\:readBySlug\\(\\) should return string but returns string\\|false\\.$#"
+			count: 1
+			path: src/Page/FilePageReader.php
+
+		-
+			message: "#^Property NFT\\\\Page\\\\FilePageReader\\:\\:\\$pageFolder has no type specified\\.$#"
+			count: 1
+			path: src/Page/FilePageReader.php
+
+		-
+			message: "#^Method NFT\\\\Template\\\\FrontendTwigRenderer\\:\\:render\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/FrontendTwigRenderer.php
+
+		-
+			message: "#^Property NFT\\\\Template\\\\FrontendTwigRenderer\\:\\:\\$menuReader has no type specified\\.$#"
+			count: 1
+			path: src/Template/FrontendTwigRenderer.php
+
+		-
+			message: "#^Property NFT\\\\Template\\\\FrontendTwigRenderer\\:\\:\\$renderer has no type specified\\.$#"
+			count: 1
+			path: src/Template/FrontendTwigRenderer.php
+
+		-
+			message: "#^Method NFT\\\\Template\\\\MustacheRenderer\\:\\:render\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/MustacheRenderer.php
+
+		-
+			message: "#^Property NFT\\\\Template\\\\MustacheRenderer\\:\\:\\$engine has no type specified\\.$#"
+			count: 1
+			path: src/Template/MustacheRenderer.php
+
+		-
+			message: "#^Method NFT\\\\Template\\\\Renderer\\:\\:render\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Renderer.php
+
+		-
+			message: "#^Method NFT\\\\Template\\\\TwigRenderer\\:\\:render\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TwigRenderer.php
+
+		-
+			message: "#^Property NFT\\\\Template\\\\TwigRenderer\\:\\:\\$renderer has no type specified\\.$#"
+			count: 1
+			path: src/Template/TwigRenderer.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 1
+			path: src/bootstrap.php
+
+		-
+			message: "#^Variable method call on mixed\\.$#"
+			count: 1
+			path: src/bootstrap.php
